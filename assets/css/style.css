@@ -135,6 +135,8 @@ input:focus, textarea:focus {outline: 0;}
 }
 .spinner_text h2{
     color: #fff;
+font-size: 40px;
+	
 }
 .spinner-inner {
     width: 60px;
