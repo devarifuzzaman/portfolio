@@ -124,10 +124,10 @@ input:focus, textarea:focus {outline: 0;}
     z-index: 99999;
 }
 .spinner_text{
-    width: 400px;
+    width: 300px;
     height: 80px;
     position: absolute;
-    top: 150px;
+    top: 130px;
     left: 0;
 	right:0;
 	bottom:0;
@@ -136,7 +136,7 @@ input:focus, textarea:focus {outline: 0;}
 }
 .spinner_text h2{
     color: #fff;
-	font-size: 30px;
+	font-size: 20px;
 	text-align: center;
 	
 	
