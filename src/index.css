@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme='dark'] {
+  --bg: 18 18 18;
+  --surface: 24 24 24;
+  --card: 32 32 32;
+  --accent: 182 245 0;
+  --accent-text: 182 245 0;
+  --on-accent: 18 18 18;
+  --heading: 245 245 245;
+  --body: 179 179 179;
+  --line: 48 48 48;
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg: 248 250 245;
+  --surface: 255 255 255;
+  --card: 255 255 255;
+  --accent: 164 217 0;
+  --accent-text: 76 110 0;
+  --on-accent: 23 23 23;
+  --heading: 23 23 23;
+  --body: 82 82 82;
+  --line: 229 231 223;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg font-sans text-body antialiased transition-colors duration-300;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-heading;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent-text));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--on-accent));
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
+  }
+
+  .mono {
+    @apply font-mono text-xs text-body;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-on-accent hover:brightness-105 hover:shadow-[0_0_0_4px_rgb(var(--accent)/0.2)];
+  }
+
+  .btn-ghost {
+    @apply border border-line text-heading hover:border-accent-text hover:text-accent-text;
+  }
+
+  .chip {
+    @apply rounded-full border border-line px-3 py-1 font-mono text-xs text-body;
+  }
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@keyframes pulse-dot {
+  50% {
+    opacity: .35;
+    transform: scale(.8);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Futuristic layer ---- */
+.grid-bg {
+  background-image: linear-gradient(rgb(var(--line) / .6) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line) / .6) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, #000 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, #000 25%, transparent 78%);
+}
+
+.spot {
+  background: radial-gradient(640px circle at var(--mx, 60%) var(--my, 25%), rgb(var(--accent) / .11), transparent 60%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  background: rgb(var(--accent) / .10);
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+[data-theme='light'] .orb {
+  background: rgb(var(--accent) / .18);
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(8vw, 6vh, 0) scale(1.15);
+  }
+}
+
+@keyframes scan {
+  from {
+    top: -3%;
+  }
+
+  to {
+    top: 103%;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(var(--accent)), transparent);
+  box-shadow: 0 0 18px 2px rgb(var(--accent) / .5);
+  animation: scan 4.5s linear infinite;
+}
+
+.caret {
+  display: inline-block;
+  width: .55ch;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: rgb(var(--accent-text));
+  animation: caret 1s steps(1) infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee-track.rev {
+  animation-direction: reverse;
+  animation-duration: 46s;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.outline-text {
+  -webkit-text-stroke: 1px rgb(var(--heading) / .45);
+  color: transparent;
+  transition: color .3s, -webkit-text-stroke-color .3s;
+}
+
+.outline-text:hover,
+.marquee .text-heading:hover {
+  color: rgb(var(--accent-text));
+  -webkit-text-stroke-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .orb,
+  .scan-line,
+  .marquee-track {
+    animation: none !important;
+  }
+
+  .scan-line {
+    display: none;
+  }
+}
